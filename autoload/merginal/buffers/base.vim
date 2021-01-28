@@ -49,12 +49,22 @@ endfunction
 function! s:f.gitRun(...) dict abort
     let l:dir = getcwd()
     execute 'cd '.fnameescape(self.repo.tree())
-    try
-        let l:gitCommand = call(self.repo.git_command, ['--no-pager'] + a:000, self.repo)
-        return merginal#system(l:gitCommand)
-    finally
-        execute 'cd '.fnameescape(l:dir)
-    endtry
+    let l:gitCommand = call(self.repo.git_command, ['--no-pager'] + a:000, self.repo)
+
+    "on checkout, run dispatch
+    if strlen(matchstr(l:gitCommand, '.*--no-pager checkout.*'))
+        echo gitbranch#name()
+        let g:lastbranch = gitbranch#name()
+        execute 'Dispatch ' . l:gitCommand
+        execute 'close'
+    else
+        try
+            let l:gitCommand = call(self.repo.git_command, ['--no-pager'] + a:000, self.repo)
+            return merginal#system(l:gitCommand)
+        finally
+            execute 'cd '.fnameescape(l:dir)
+        endtry
+    endif
 endfunction
 
 function! s:f.gitLines(...) dict abort
