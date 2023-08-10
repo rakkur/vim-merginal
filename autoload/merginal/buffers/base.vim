@@ -65,16 +65,20 @@ endfunction
 function! s:f.gitRun(...) dict abort
     let l:dir = getcwd()
     execute 'cd '.fnameescape(self.fugitiveContext.work_tree)
-    try
-        let l:gitCommand = self.gitCommand('--no-pager', a:000)
-        let l:show_commands = get(g:, 'merginal_showCommands', 1)
-        if l:show_commands
-            echo 'Running command' string(l:gitCommand)
-        endif
-        return merginal#system(l:gitCommand)
-    finally
-        execute 'cd '.fnameescape(l:dir)
-    endtry
+    let l:gitCommand = self.gitCommand('--no-pager', a:000)
+
+    "on checkout, run dispatch
+    if strlen(matchstr(l:gitCommand, '.*--no-pager checkout.*'))
+        let g:lastbranch = FugitiveHead()
+        execute 'Dispatch ' . l:gitCommand
+        execute 'close'
+    else
+        try
+            return merginal#system(l:gitCommand)
+        finally
+            execute 'cd '.fnameescape(l:dir)
+        endtry
+    endif
 endfunction
 
 function! s:f.gitLines(...) dict abort

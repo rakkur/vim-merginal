@@ -58,7 +58,7 @@ function! s:f.deleteBranchUnderCursor() dict abort
         let l:answer = 'yes' == input('Delete branch `'.l:branch.handle.'`? (type "yes" to confirm) ')
     elseif l:branch.isRemote
         "Deleting remote branches needs a special warning
-        let l:answer = 'yes-remote' == input('Delete remote(!) branch `'.l:branch.handle.'`? (type "yes-remote" to confirm) ')
+        let l:answer = 'yes-r' == input('Delete remote(!) branch `'.l:branch.handle.'`? (type "yes-r" to confirm) ')
     endif
     if l:answer
         if l:branch.isLocal

@@ -1,3 +1,12 @@
+=======
+FORK
+============
+
+This fork provides only a few minor changes:
+* Run dispatch instead of normal checkout so that checkout is done asynchronously
+* Assign branch name to g:lastbranch so that I can refer to it and switch back to my previous branch
+* reduce characters typed when deleting a remote branch (yes-r vs yes-remote)
+
 INTRODUCTION
 ============
 

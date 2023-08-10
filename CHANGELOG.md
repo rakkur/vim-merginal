@@ -5,9 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-### Added
-- `g:merginal_showCommands` to control whether Git commands will be `echo`ed.
-- `g:merginal_resizeWindowToBranchLen` and `g:merginal_resizePadding` to resize the branch list to fit the branches lengths.
+feature/HSD-3314-upgrade-to-.net8### Added
+- `gontrol` to control whether Git commands will be `lengths.`ed.
 - `ms` keymap for merging with `--squash`.
 - `g:merginal_branchListFlags` to control the branch list displayed in the Merginal buffer.
 
